@@ -1,0 +1,13 @@
+## Interface: 11500
+## Title: Gazetteer Field Kit
+## Notes: Field logger for The Forever Gazetteer. Enable "Load out of date AddOns" until TOC matches the Forever client.
+## Version: 0.1.0-beta
+## SavedVariables: GazetteerFieldKitDB
+## Author: Forever Gazetteer
+## X-Website: https://forevergazetteer.com
+## X-License: MIT
+
+Core.lua
+DB.lua
+Events.lua
+UI.lua
