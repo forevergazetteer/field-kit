@@ -19,6 +19,14 @@ frame:SetScript("OnEvent", function(_, event, ...)
     local name = ...
     if name == "GazetteerFieldKit" then
       GFK.DB:Init()
+      local version, build, buildDate, toc = GetBuildInfo()
+      GazetteerFieldKitDB.build = {
+        version = version,
+        build = build,
+        date = buildDate,
+        toc = toc,
+        product = "forever",
+      }
     end
   elseif event == "PLAYER_LOGIN" then
     GFK:Print("loaded " .. GFK.VERSION .. " — /gfk")
