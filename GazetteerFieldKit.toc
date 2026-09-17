@@ -1,6 +1,6 @@
-## Interface: 11500
+## Interface: 16001
 ## Title: Gazetteer Field Kit
-## Notes: Field logger for The Forever Gazetteer. Enable "Load out of date AddOns" until TOC matches the Forever client.
+## Notes: Field logger for The Forever Gazetteer. Offline. No ads.
 ## Version: 0.1.0-beta
 ## SavedVariables: GazetteerFieldKitDB
 ## Author: Forever Gazetteer

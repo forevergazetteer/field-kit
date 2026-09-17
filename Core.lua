@@ -11,6 +11,23 @@ function GFK:Print(msg)
   print("|cffc4a574GFK|r " .. tostring(msg))
 end
 
+function GFK:PrintBuild()
+  local version, build, buildDate, toc = GetBuildInfo()
+  local line = table.concat({
+    tostring(version),
+    tostring(build),
+    tostring(buildDate),
+    tostring(toc),
+  }, " ")
+  GFK:Print(line)
+  if CopyToClipboard then
+    local ok = pcall(CopyToClipboard, line)
+    if ok then
+      GFK:Print("copied to clipboard")
+    end
+  end
+end
+
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("PLAYER_LOGIN")
@@ -39,12 +56,14 @@ SlashCmdList["GAZETTEERFIELDKIT"] = function(msg)
   msg = (msg or ""):lower():gsub("^%s+", ""):gsub("%s+$", "")
   if msg == "export" then
     GFK.DB:Export()
+  elseif msg == "build" then
+    GFK:PrintBuild()
   elseif msg == "ui" or msg == "" then
     GFK.UI:Toggle()
   elseif msg == "clear" then
     GFK.DB:ClearSession()
     GFK:Print("session log cleared")
   else
-    GFK:Print("/gfk  /gfk export  /gfk clear")
+    GFK:Print("/gfk  /gfk build  /gfk export  /gfk clear")
   end
 end
