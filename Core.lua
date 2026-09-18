@@ -20,12 +20,6 @@ function GFK:PrintBuild()
     tostring(toc),
   }, " ")
   GFK:Print(line)
-  if CopyToClipboard then
-    local ok = pcall(CopyToClipboard, line)
-    if ok then
-      GFK:Print("copied to clipboard")
-    end
-  end
 end
 
 local frame = CreateFrame("Frame")
@@ -62,7 +56,7 @@ SlashCmdList["GAZETTEERFIELDKIT"] = function(msg)
     GFK.UI:Toggle()
   elseif msg == "clear" then
     GFK.DB:ClearSession()
-    GFK:Print("session log cleared")
+    GFK:Print("session target dedup cleared; saved log remains")
   else
     GFK:Print("/gfk  /gfk build  /gfk export  /gfk clear")
   end

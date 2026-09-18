@@ -14,16 +14,20 @@ Logs loot, quests, and targets locally so we can build the Forever database.
 
 The folder name must be `GazetteerFieldKit`. Forever beta uses the `_classic_beta_` product folder (not `_forever_`).
 
-3. Restart the client and enable the addon. `## Interface` is **16001** (client `1.60.1`, build `69893`, recorded 2026-09-17). If a later patch marks it out of date, enable **Load out of date AddOns** until we bump TOC.
+3. Restart the client and enable the addon. `## Interface` is **16001**. Hotfix build numbers change often; they do not require a Field Kit update unless this Interface value changes. If a later patch marks the addon out of date, enable **Load out of date AddOns** until we bump TOC.
 
 ## Commands
 
 | Command | What it does |
 |---|---|
 | `/gfk` | Toggle the last-20 events window |
-| `/gfk build` | Print version, build, date, and Interface (copies to clipboard if the client allows) |
+| `/gfk build` | Print version, build, date, and Interface |
 | `/gfk export` | Print how many events are stored |
-| `/gfk clear` | Clear this session's list (saved log remains) |
+| `/gfk clear` | Reset this login’s target dedup (saved log remains) |
+
+`target` rows are creatures only. Player and pet units are skipped. The same spawn GUID is logged once per login; a new spawn of the same npc id is logged again. Map x/y is the **player** stand-point until a Forever NPC-position API exists.
+
+Also logged: loot window slots (item id + source GUID, including `GameObject-` / `sourceObjectId` for nodes), gossip/quest greeting (quests on an NPC), instance enter/leave, quest title and NPC on accept/turn-in. Other players’ loot chat is ignored. Empty or duplicate loot windows are skipped.
 
 Data lives in SavedVariables after logout:
 

@@ -6,7 +6,8 @@ function GFK.DB:Init()
   local db = GazetteerFieldKitDB
   db.version = GFK.VERSION
   db.events = db.events or {}
-  db.session = db.session or {}
+  -- Older builds copied every row into session; drop it so logout does not rewrite a duplicate table.
+  db.session = nil
 end
 
 function GFK.DB:Add(kind, payload)
@@ -16,7 +17,6 @@ function GFK.DB:Add(kind, payload)
     data = payload or {},
   }
   table.insert(GazetteerFieldKitDB.events, row)
-  table.insert(GazetteerFieldKitDB.session, row)
   if GFK.UI and GFK.UI.Refresh then
     GFK.UI:Refresh()
   end
@@ -34,7 +34,9 @@ function GFK.DB:Last(n)
 end
 
 function GFK.DB:ClearSession()
-  GazetteerFieldKitDB.session = {}
+  if GFK.Events and GFK.Events.ClearSeen then
+    GFK.Events:ClearSeen()
+  end
 end
 
 function GFK.DB:Export()
